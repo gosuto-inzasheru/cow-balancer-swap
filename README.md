@@ -1,16 +1,16 @@
-# AAVE <> BALANCER Swap
+# COW <> BALANCER Swap
 
-This repository contains the OTC swap contract and AAVE proposal payloads for AAVE Governance.
+This repository contains the OTC swap contract.
 
 ## Installation
 
-It requires [Foundry](https://github.com/gakonst/foundry) installed to run. You can find instructions here [Foundry installation](https://github.com/gakonst/foundry#installation).
+It requires [Foundry](https://github.com/foundry-rs/foundry) installed to run. You can find instructions here [Foundry installation](https://book.getfoundry.sh/getting-started/installation).
 
 To set up the project manually, run the following commands:
 
 ```sh
-$ git clone https://github.com/llama-community/aave-balancer-swap.git
-$ cd aave-balancer-swap/
+$ git clone https://github.com/gosuto-inzasheru/cow-balancer-swap.git
+$ cd cow-balancer-swap/
 $ npm install
 $ forge install
 ```
