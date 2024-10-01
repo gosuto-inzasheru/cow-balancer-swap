@@ -22,3 +22,9 @@ fuzz_runs = 5_000
 [profile.deploy]
 optimizer = true
 optimizer_runs = 1_000_000
+
+[rpc_endpoints]
+ethereum = "${RPC_URL}"
+
+[etherscan]
+ethereum = { key = "${ETHERSCAN_API_KEY}" }
