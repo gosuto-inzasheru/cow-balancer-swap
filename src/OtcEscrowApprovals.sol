@@ -17,22 +17,21 @@ contract OtcEscrowApprovals {
     using SafeERC20 for IERC20;
 
     address public constant BALANCER_TREASURY = 0x10A19e7eE7d7F8a52822f6817de8ea18204F2e4f;
-    address public constant AAVE_ECOSYSTEM_RESERVE = 0x25F2226B597E8F9514B3F68F00f494cF4f286491;
-    address public constant AAVE_MAINNET_RESERVE_FACTOR = 0x464C71f6c2F760DdA6093dCB91C24c39e5d6e18c;
+    address public constant COW_TREASURY = 0xcA771eda0c70aA7d053aB1B25004559B918FE662;
 
     IERC20 public constant BAL = IERC20(0xba100000625a3754423978a60c9317c58a424e3D);
-    IERC20 public constant AAVE = IERC20(0x7Fc66500c84A76Ad7e9c93437bFc5Ac33E2DDaE9);
+    IERC20 public constant COW = IERC20(0xDEf1CA1fb7FBcDC777520aa7f396b4E015F497aB);
 
-    uint256 public constant BAL_AMOUNT = 200000e18;
-    uint256 public constant AAVE_AMOUNT = 1690728e16;
+    uint256 public constant BAL_AMOUNT = 250_000e18;
+    uint256 public constant COW_AMOUNT = 2118898802088361831901126; /// @dev uint256(250_000e18) * uint256(187776583) / uint256(22154973)
 
     bool public hasSwapOccured;
 
-    event Swap(uint256 balAmount, uint256 aaveAmount);
+    event Swap(uint256 balAmount, uint256 cowAmount);
 
     error SwapAlreadyOccured();
 
-    /// @dev Atomically trade specified amounts of BAL token and AAVE token
+    /// @dev Atomically trade specified amounts of BAL token and COW token
     /// @dev Anyone may execute the swap if sufficient token approvals are given by both parties
     function swap() external {
         // Check in case of infinite approvals and prevent a second swap
@@ -40,11 +39,11 @@ contract OtcEscrowApprovals {
         hasSwapOccured = true;
 
         // Transfer expected receivedToken from beneficiary
-        BAL.safeTransferFrom(BALANCER_TREASURY, AAVE_MAINNET_RESERVE_FACTOR, BAL_AMOUNT);
+        BAL.safeTransferFrom(BALANCER_TREASURY, COW_TREASURY, BAL_AMOUNT);
 
         // Transfer sentToken to beneficiary
-        AAVE.safeTransferFrom(AAVE_ECOSYSTEM_RESERVE, BALANCER_TREASURY, AAVE_AMOUNT);
+        COW.safeTransferFrom(COW_TREASURY, BALANCER_TREASURY, COW_AMOUNT);
 
-        emit Swap(BAL_AMOUNT, AAVE_AMOUNT);
+        emit Swap(BAL_AMOUNT, COW_AMOUNT);
     }
 }
